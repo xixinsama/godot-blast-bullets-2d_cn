@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <class name="MultiMeshBulletsData2D" inherits="Resource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
 	<brief_description>
-		Contains spawn data for all [MultiMeshBullets2D].
+		包含所有[MultiMeshBullets2D]的生成数据。
 	</brief_description>
 	<description>
 	</description>
@@ -12,21 +12,21 @@
 			<return type="int" />
 			<param index="0" name="numbers" type="int[]" />
 			<description>
-				Calculates a bitmask from an array of integers.
+				从整数数组计算位掩码。
 			</description>
 		</method>
 		<method name="set_collision_layer_from_array">
 			<return type="void" />
 			<param index="0" name="array_of_layers" type="int[]" />
 			<description>
-				Sets the collision layer from an array of integers by converting them to a bitmask.
+				通过将整数数组转换为位掩码来设置碰撞层。
 			</description>
 		</method>
 		<method name="set_collision_mask_from_array">
 			<return type="void" />
 			<param index="0" name="array_of_masks" type="int[]" />
 			<description>
-				Sets the collision mask from an array of integers by converting them to a bitmask.
+				通过将整数数组转换为位掩码来设置碰撞掩码。
 			</description>
 		</method>
 		<method name="set_light_mask_from_array">

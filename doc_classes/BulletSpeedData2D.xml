@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<class name="BulletSpeedData2D" inherits="Resource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+<?xml version='1.0' encoding='utf-8'?>
+<class xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="BulletSpeedData2D" inherits="Resource" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
 	<brief_description>
-		Contains bullet speed related data.
+		包含子弹速度相关数据。
 	</brief_description>
 	<description>
 	</description>
@@ -17,20 +17,12 @@
 			<param index="4" name="max_speed_MAX" type="float" />
 			<param index="5" name="acceleration_MIN" type="float" />
 			<param index="6" name="acceleration_MAX" type="float" />
-			<description>
-				Generates random speed data.
-			</description>
+			<description>生成随机速度数据。</description>
 		</method>
 	</methods>
 	<members>
-		<member name="acceleration" type="float" setter="set_acceleration" getter="get_acceleration" default="0.0">
-			The amount by which the speed increases every frame until reaching max_speed.
-		</member>
-		<member name="max_speed" type="float" setter="set_max_speed" getter="get_max_speed" default="0.0">
-			The max possible speed that the bullets can have.
-		</member>
-		<member name="speed" type="float" setter="set_speed" getter="get_speed" default="0.0">
-			The current speed that the bullets have.
-		</member>
+		<member name="acceleration" type="float" setter="set_acceleration" getter="get_acceleration" default="0.0">速度每帧增加的量直至达到 max_speed。</member>
+		<member name="max_speed" type="float" setter="set_max_speed" getter="get_max_speed" default="0.0">子弹可以达到的最大速度。</member>
+		<member name="speed" type="float" setter="set_speed" getter="get_speed" default="0.0">子弹当前的速度。</member>
 	</members>
 </class>

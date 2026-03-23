@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <class name="DirectionalBullets2D" inherits="MultiMeshBullets2D" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
 	<brief_description>
-		Bullets that travel in different directions based on their transform rotation. Always use the [BulletFactory2D] to spawn them, that's the only proper way.
+		基于变换旋转沿不同方向移动的子弹。始终使用[BulletFactory2D]来生成它们，这是唯一正确的方式。
 	</brief_description>
 	<description>
 		[DirectionalBullets2D] extends [MultiMeshBullets2D] with advanced homing capabilities. It supports per-bullet homing deques for individualized target chasing (e.g., specific enemies) and a shared deque for uniform swarm behaviors (e.g., collective waypoint following). Targets can be global positions, Node2D instances, or mouse position, with optional auto-pop on reach (see [member bullet_homing_auto_pop_after_target_reached], [member shared_homing_deque_auto_pop_after_target_reached], [signal bullet_homing_target_reached]), smoothing for natural turning (see [member homing_smoothing]), distance before reached - [member homing_distance_before_reached] and update time interval (see [member homing_update_interval]). Enables complex bullet patterns in 2D games.
@@ -28,9 +28,9 @@
 
 		Note: For object pooling options see [member MultiMeshBullets2D.is_multimesh_auto_pooling_enabled] and [member MultiMeshBullets2D.is_attachments_auto_pooling_enabled].
 
-		Note: Bullets can be made to collide multiple times - use [member MultiMeshBullets2D.bullet_max_collision_count] and [member MultiMeshBullets2D.bullets_current_collision_count].
+		注意：子弹可以被设置为多次碰撞 - 使用[member MultiMeshBullets2D.bullet_max_collision_count]和[member MultiMeshBullets2D.bullets_current_collision_count]。
 
-		Node: Bullets can have animated textures that you can switch between [method MultiMeshBullets2D.set_textures].
+		注意：子弹可以有动画纹理，你可以通过[method MultiMeshBullets2D.set_textures]在它们之间切换。
 	</description>
 	<tutorials>
 	</tutorials>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <class name="BulletAttachment2D" inherits="Node2D" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
 	<brief_description>
-		Provides the functionality of bullets being able to carry particles or other nodes as they move.
+		提供子弹在移动时能够携带粒子或其他节点的功能。
 	</brief_description>
 	<description>
 	</description>

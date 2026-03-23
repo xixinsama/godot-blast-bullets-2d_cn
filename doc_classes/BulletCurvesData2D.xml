@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <class name="BulletCurvesData2D" inherits="Resource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
 	<brief_description>
-		Holds data for controlling bullet movement and rotation using curves in 2D. Can override [BulletSpeedData2D] and [BulletRotationData2D].
+		保存使用曲线控制2D子弹移动和旋转的数据。可以覆盖[BulletSpeedData2D]和[BulletRotationData2D]。
 	</brief_description>
 	<description>
 	</description>
@@ -9,7 +9,7 @@
 	</tutorials>
 	<members>
 		<member name="direction_curve_rotation_speed" type="float" setter="set_direction_curve_rotation_speed" getter="get_direction_curve_rotation_speed" default="18.0">
-			The speed at which the bullet rotates to face the adjusted direction defined by the X and Y direction curves.
+			子弹旋转以面向X和Y方向曲线定义的调整方向的速度。
 		</member>
 		<member name="movement_speed_curve" type="Curve" setter="set_movement_speed_curve" getter="get_movement_speed_curve">
 			The curve used to control the movement speed of the bullet over time. 

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <class name="BlockBulletsData2D" inherits="MultiMeshBulletsData2D" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
 	<brief_description>
-		Contains spawn data for the [BlockBullets2D].
+		包含[BlockBullets2D]的生成数据。
 	</brief_description>
 	<description>
-		Ensure that the [member MultiMeshBulletsData2D.transforms] property is set.
-		Check [MultiMeshBulletsData2D]'s documentation for the rest of the properties.
+		确保设置了[member MultiMeshBulletsData2D.transforms]属性。
+		有关其余属性，请查看[MultiMeshBulletsData2D]的文档。
 	</description>
 	<tutorials>
 	</tutorials>
 	<members>
 		<member name="block_rotation_radians" type="float" setter="set_block_rotation_radians" getter="get_block_rotation_radians" default="0.0">
-			Determines the direction in which the block of bullets travels.
+			决定子弹块的移动方向。
 		</member>
 		<member name="block_speed" type="BulletSpeedData2D" setter="set_block_speed" getter="get_block_speed">
-			This is the speed data that the block of bullets uses.
+			这是子弹块使用的速度数据。
 		</member>
 	</members>
 </class>

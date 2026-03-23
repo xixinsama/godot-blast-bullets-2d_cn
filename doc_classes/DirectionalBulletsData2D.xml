@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <class name="DirectionalBulletsData2D" inherits="MultiMeshBulletsData2D" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
 	<brief_description>
-		Contains spawn data for the [DirectionalBullets2D].
+		包含[DirectionalBullets2D]的生成数据。
 	</brief_description>
 	<description>
 		Ensure that the [member MultiMeshBulletsData2D.transforms] and [member all_bullet_speed_data] are set or your game will crash.
