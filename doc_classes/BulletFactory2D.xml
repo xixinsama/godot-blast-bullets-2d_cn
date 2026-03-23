@@ -5,17 +5,7 @@
 	<brief_description>BlastBullets2D插件的核心。使用此节点来生成子弹。</brief_description>
 	
 	
-	<description>工厂负责所有生成子弹和配置其他插件相关选项的工作。
-		在你的游戏整个生命周期中保留你的[b]BulletFactory2D[/b]节点引用，并在需要时调用相关函数。
-
-		教程和使用示例：
-		[url=https://www.youtube.com/@realnikich]YouTube频道[/url]
-		[url=https://github.com/nikoladevelops/godot-blast-bullets-2d]BlastBullets2D官方仓库[/url]
-
-		[b]此插件完全免费且开源 - 由[url=https://x.com/realNikich]realNikich[/url]创建[/b]
-		支持我的工作
-		[url=https://ko-fi.com/realnikich]在Ko-fi上捐赠[/url]
-		[url=https://www.patreon.com/realnikich]在Patreon上捐赠[/url]</description>
+	<description>工厂负责所有生成子弹和配置其他插件相关选项的工作。 在你的游戏整个生命周期中保留你的[b]BulletFactory2D[/b]节点引用，并在需要时调用相关函数。 教程和使用示例： [url=https://www.youtube.com/@realnikich]YouTube频道[/url] [url=https://github.com/nikoladevelops/godot-blast-bullets-2d]BlastBullets2D官方仓库[/url] [b]此插件完全免费且开源 - 由[url=https://x.com/realNikich]realNikich[/url]创建[/b] 支持我的工作 [url=https://ko-fi.com/realnikich]在Ko-fi上捐赠[/url] [url=https://www.patreon.com/realnikich]在Patreon上捐赠[/url]</description>
 	
 	
 	<tutorials>
@@ -25,10 +15,7 @@
 	<methods>
 		
 		
-		<method name="debug_get_active_attachments_amount">
-			
-			
-			<return type="int"/>
+		<method name="debug_get_active_attachments_amount"><return type="int" />
 			
 			
 			<description>获取活跃的[BulletAttachment2D]节点数量。</description>
@@ -37,13 +24,10 @@
 		</method>
 		
 		
-		<method name="debug_get_active_bullets_amount">
+		<method name="debug_get_active_bullets_amount"><return type="int" />
 			
 			
-			<return type="int"/>
-			
-			
-			<param index="0" name="bullet_type" type="int" enum="BulletFactory2D.BulletType"/>
+			<param index="0" name="bullet_type" type="int" enum="BulletFactory2D.BulletType" />
 			
 			
 			<description>获取特定类型的活动子弹多重网格体的数量。</description>
@@ -52,10 +36,7 @@
 		</method>
 		
 		
-		<method name="debug_get_attachments_pool_amount">
-			
-			
-			<return type="int"/>
+		<method name="debug_get_attachments_pool_amount"><return type="int" />
 			
 			
 			<description>获取对象池内[BulletAttachment2D]的数量。</description>
@@ -64,25 +45,19 @@
 		</method>
 		
 		
-		<method name="debug_get_attachments_pool_info">
+		<method name="debug_get_attachments_pool_info"><return type="Dictionary" />
 			
 			
-			<return type="Dictionary"/>
-			
-			
-			<description>获取有关附件对象池的完整信息。返回一个 [Dictionary]，其中包含 [b]attachment_id 作为 KEY[/b] 和 [b]以该attachment_id 作为 VALUE[/b] 的附件数量。</description>
+			<description>获取有关附件对象池的完整信息。返回一个 [Dictionary]，其中包含 [b]attachment_id 作为 键[/b] 和 [b]以该attachment_id 作为 值[/b] 的附件数量。</description>
 			
 		
 		</method>
 		
 		
-		<method name="debug_get_bullets_pool_amount">
+		<method name="debug_get_bullets_pool_amount"><return type="int" />
 			
 			
-			<return type="int"/>
-			
-			
-			<param index="0" name="bullet_type" type="int" enum="BulletFactory2D.BulletType"/>
+			<param index="0" name="bullet_type" type="int" enum="BulletFactory2D.BulletType" />
 			
 			
 			<description>获取当前对象池中特定类型的子弹多重网格体的数量。</description>
@@ -91,25 +66,19 @@
 		</method>
 		
 		
-		<method name="debug_get_bullets_pool_info">
+		<method name="debug_get_bullets_pool_info"><return type="Dictionary" />
 			
 			
-			<return type="Dictionary"/>
+			<param index="0" name="bullet_type" type="int" enum="BulletFactory2D.BulletType" />
 			
 			
-			<param index="0" name="bullet_type" type="int" enum="BulletFactory2D.BulletType"/>
-			
-			
-			<description>获取有关特定类型的子弹多重网格对象池的完整信息。返回一个 [Dictionary]，其中包含多重网格中的 [b] 子弹数量作为 KEY[/b]，以及包含该数量的多重网格的 [b] 数量作为 VALUE[/b]。</description>
+			<description>获取有关特定类型的子弹多重网格体对象池的完整信息。返回一个 [Dictionary]，其中包含多重网格体中的 [b] 子弹数量作为 键[/b]，以及包含该数量的多重网格体的 [b] 数量作为 值[/b]。</description>
 			
 		
 		</method>
 		
 		
-		<method name="debug_get_total_attachments_amount">
-			
-			
-			<return type="int"/>
+		<method name="debug_get_total_attachments_amount"><return type="int" />
 			
 			
 			<description>获取场景树中[BulletAttachment2D]的总量。</description>
@@ -118,13 +87,10 @@
 		</method>
 		
 		
-		<method name="debug_get_total_bullets_amount">
+		<method name="debug_get_total_bullets_amount"><return type="int" />
 			
 			
-			<return type="int"/>
-			
-			
-			<param index="0" name="bullet_type" type="int" enum="BulletFactory2D.BulletType"/>
+			<param index="0" name="bullet_type" type="int" enum="BulletFactory2D.BulletType" />
 			
 			
 			<description>获取场景树中特定类型的子弹多重网格体的总量。</description>
@@ -133,73 +99,58 @@
 		</method>
 		
 		
-		<method name="free_active_bullets">
+		<method name="free_active_bullets"><return type="void" />
 			
 			
-			<return type="void"/>
+			<param index="0" name="amount_bullets" type="int" default="0" />
 			
 			
-			<param index="0" name="amount_bullets" type="int" default="0"/>
-			
-			
-			<description>释放当前场景树中的所有活动子弹。如果您提供的值大于 0，您还可以选择仅释放具有特定 [code]amount_bullets_per_instance[/code] 的实例。示例：如果您想释放场景树中的所有多重网格体，每个网格体都有 200 颗子弹 ([code]amount_bullets_per_instance=200[/code])。</description>
+			<description>释放当前场景树中的所有活动子弹。如果您提供的值大于0，您还可以选择仅释放具有特定 [code]amount_bullets_per_instance[/code] 的实例。示例：如果您想释放场景树中的所有多重网格体，每个多重网格体包含 200 颗子弹 ([code]amount_bullets_per_instance=200[/code])。</description>
 			
 		
 		</method>
 		
 		
-		<method name="free_attachments_pool">
+		<method name="free_attachments_pool"><return type="void" />
 			
 			
-			<return type="void"/>
+			<param index="0" name="attachment_id" type="int" default="-1" />
 			
 			
-			<param index="0" name="attachment_id" type="int" default="-1"/>
-			
-			
-			<description>默认情况下完全释放 [BulletAttachment2D] 对象池。如果您提供的值不是负数，您还可以选择仅释放具有特定 [code]attachment_id[/code] 的附件。示例：如果您想要释放对象池中所有具有 [code]attachment_id=5[/code] 的附件。</description>
+			<description>默认情况下完全释放 [BulletAttachment2D] 对象池。如果您提供的值非负，您还可以选择仅释放具有特定 [code]attachment_id[/code] 的附件。示例：如果您想要释放对象池中所有具有 [code]attachment_id=5[/code] 的附件。</description>
 			
 		
 		</method>
 		
 		
-		<method name="free_bullets_pool">
+		<method name="free_bullets_pool"><return type="void" />
 			
 			
-			<return type="void"/>
+			<param index="0" name="bullet_type" type="int" enum="BulletFactory2D.BulletType" />
 			
 			
-			<param index="0" name="bullet_type" type="int" enum="BulletFactory2D.BulletType"/>
+			<param index="1" name="amount_bullets_per_instance" type="int" default="0" />
 			
 			
-			<param index="1" name="amount_bullets_per_instance" type="int" default="0"/>
-			
-			
-			<description>默认情况下完全释放特定项目符号类型的对象池。如果您提供的值大于 0，您还可以选择仅释放具有特定 [code]amount_bullets_per_instance[/code] 的实例。示例：如果您想要释放对象池中的所有多重网格体，每个网格体各有 200 个子弹 ([code]amount_bullets_per_instance=200[/code])。</description>
+			<description>默认情况下完全释放特定项目符号类型的对象池。如果您提供的值大于0，您还可以选择仅释放具有特定 [code]amount_bullets_per_instance[/code] 的实例。示例：如果您想要释放对象池中的所有多重网格体，每个多重网格体包含 200 个子弹 ([code]amount_bullets_per_instance=200[/code])。</description>
 			
 		
 		</method>
 		
 		
-		<method name="free_disabled_bullets">
+		<method name="free_disabled_bullets"><return type="void" />
 			
 			
-			<return type="void"/>
+			<param index="0" name="amount_bullets" type="int" default="0" />
 			
 			
-			<param index="0" name="amount_bullets" type="int" default="0"/>
-			
-			
-			<description>释放场景树中当前所有已禁用的子弹。如果您提供的值大于 0，您还可以选择仅释放具有特定 [code]amount_bullets_per_instance[/code] 的实例。示例：如果您想释放场景树中的所有多重网格体，每个网格体都有 200 颗子弹 ([code]amount_bullets_per_instance=200[/code])。</description>
+			<description>释放场景树中当前所有已禁用的子弹。如果您提供的值大于0，您还可以选择仅释放具有特定 [code]amount_bullets_per_instance[/code] 的实例。示例：如果您想释放场景树中的所有多重网格体，每个多重网格体包含 200 颗子弹 ([code]amount_bullets_per_instance=200[/code])。</description>
 			
 		
 		</method>
 		
 		
-		<method name="get_is_factory_busy" qualifiers="const">
-			
-			
-			<return type="bool"/>
+		<method name="get_is_factory_busy" qualifiers="const"><return type="bool" />
 			
 			
 			<description>有时，[b]BulletFactory2D[/b] 可能正忙于做一些重要的工作。此属性提供了一种简单的方法来检查这是否属实。</description>
@@ -208,10 +159,7 @@
 		</method>
 		
 		
-		<method name="get_physics_space" qualifiers="const">
-			
-			
-			<return type="RID"/>
+		<method name="get_physics_space" qualifiers="const"><return type="RID" />
 			
 			
 			<description>获取子弹相互作用的物理世界空间。</description>
@@ -220,34 +168,31 @@
 		</method>
 		
 		
-		<method name="helper_generate_transforms_grid" qualifiers="static">
+		<method name="helper_generate_transforms_grid" qualifiers="static"><return type="Transform2D[]" />
 			
 			
-			<return type="Transform2D[]"/>
+			<param index="0" name="transforms_amount" type="int" />
 			
 			
-			<param index="0" name="transforms_amount" type="int"/>
+			<param index="1" name="marker_transform" type="Transform2D" />
 			
 			
-			<param index="1" name="marker_transform" type="Transform2D"/>
+			<param index="2" name="rows_per_column" type="int" default="10" />
 			
 			
-			<param index="2" name="rows_per_column" type="int" default="10"/>
+			<param index="3" name="alignment" type="int" enum="BulletFactory2D.Alignment" default="3" />
 			
 			
-			<param index="3" name="alignment" type="int" enum="BulletFactory2D.Alignment" default="3"/>
+			<param index="4" name="column_offset" type="float" default="150.0" />
 			
 			
-			<param index="4" name="column_offset" type="float" default="150.0"/>
+			<param index="5" name="row_offset" type="float" default="150.0" />
 			
 			
-			<param index="5" name="row_offset" type="float" default="150.0"/>
+			<param index="6" name="rotate_grid_with_marker" type="bool" default="true" />
 			
 			
-			<param index="6" name="rotate_grid_with_marker" type="bool" default="true"/>
-			
-			
-			<param index="7" name="random_local_rotation" type="bool" default="false"/>
+			<param index="7" name="random_local_rotation" type="bool" default="false" />
 			
 			
 			<description>生成相对于 [code]marker_transform[/code] 定位的变换网格。</description>
@@ -256,19 +201,16 @@
 		</method>
 		
 		
-		<method name="populate_attachments_pool">
+		<method name="populate_attachments_pool"><return type="void" />
 			
 			
-			<return type="void"/>
+			<param index="0" name="attachment_scene" type="PackedScene" />
 			
 			
-			<param index="0" name="attachment_scene" type="PackedScene"/>
+			<param index="1" name="attachment_id" type="int" />
 			
 			
-			<param index="1" name="attachment_id" type="int"/>
-			
-			
-			<param index="2" name="amount_attachments" type="int"/>
+			<param index="2" name="amount_attachments" type="int" />
 			
 			
 			<description>填充附件对象池。确保 [code]attachment_scene[/code] 包含一个实际的 [BulletAttachment2D] 场景，您可以在其中附加其他节点 - 粒子或任何您能想到的其他东西。</description>
@@ -277,16 +219,13 @@
 		</method>
 		
 		
-		<method name="populate_bullets_pool">
+		<method name="populate_bullets_pool"><return type="void" />
 			
 			
-			<return type="void"/>
+			<param index="0" name="multimesh_data" type="MultiMeshBulletsData2D" />
 			
 			
-			<param index="0" name="multimesh_data" type="MultiMeshBulletsData2D"/>
-			
-			
-			<param index="1" name="amount_instances" type="int"/>
+			<param index="1" name="amount_instances" type="int" />
 			
 			
 			<description>填充特定的 [code]bullet_type[/code] 对象池。 [code]amount_instances[/code] 是多重网格体的数量，而 [code]amount_bullets_per_instance[/code] 确定每个多重网格体实例拥有多少子弹。</description>
@@ -295,29 +234,22 @@
 		</method>
 		
 		
-		<method name="reset">
+		<method name="reset"><return type="void" />
 			
 			
-			<return type="void"/>
+			<param index="0" name="amount_bullets" type="int" default="0" />
 			
 			
-			<param index="0" name="amount_bullets" type="int" default="0"/>
-			
-			
-			<description>重置工厂 - 释放所有内容（对象池、生成的子弹、生成的附件 - 全部从内存中删除）。
-				完成后发出 [signal reset_finished] 信号。</description>
+			<description>重置工厂 - 释放所有内容（对象池、生成的子弹、生成的附件 - 全部从内存中删除）。 完成后发出 [signal reset_finished] 信号。</description>
 			
 		
 		</method>
 		
 		
-		<method name="set_physics_space">
+		<method name="set_physics_space"><return type="void" />
 			
 			
-			<return type="void"/>
-			
-			
-			<param index="0" name="new_physics_space" type="RID"/>
+			<param index="0" name="new_physics_space" type="RID" />
 			
 			
 			<description>设置子弹相互作用的世界物理空间。</description>
@@ -326,13 +258,10 @@
 		</method>
 		
 		
-		<method name="set_use_physics_interpolation_runtime">
+		<method name="set_use_physics_interpolation_runtime"><return type="void" />
 			
 			
-			<return type="void"/>
-			
-			
-			<param index="0" name="enable" type="bool"/>
+			<param index="0" name="enable" type="bool" />
 			
 			
 			<description>控制是否为 [b]BulletFactory2D[/b] 控制的所有子弹启用物理插值。该方法应该在运行时调用，而 [method set_use_physicals_interpolation_editor] 方法应该在编辑器中调用。</description>
@@ -341,74 +270,52 @@
 		</method>
 		
 		
-		<method name="spawn_block_bullets">
+		<method name="spawn_block_bullets"><return type="void" />
 			
 			
-			<return type="void"/>
+			<param index="0" name="spawn_data" type="BlockBulletsData2D" />
 			
 			
-			<param index="0" name="spawn_data" type="BlockBulletsData2D"/>
-			
-			
-			<description>生成 [BlockBullets2D] - 充当以相同速度沿单一方向行进的方块的子弹。
-				如果对象池中已经存在可用的多重网格（与提供的变换量匹配），则它将与新数据一起重新使用。
-				这些子弹不能单独控制，但它们的性能更有效。</description>
+			<description>生成 [BlockBullets2D] - 充当以相同速度沿单一方向行进的方块的子弹。 如果对象池中已经存在可用的多重网格体（与提供的变换量匹配），则它将与新数据一起重新使用。 这些子弹不能单独控制，但它们的性能更有效。</description>
 			
 		
 		</method>
 		
 		
-		<method name="spawn_controllable_directional_bullets">
+		<method name="spawn_controllable_directional_bullets"><return type="DirectionalBullets2D" />
 			
 			
-			<return type="DirectionalBullets2D"/>
+			<param index="0" name="spawn_data" type="DirectionalBulletsData2D" />
 			
 			
-			<param index="0" name="spawn_data" type="DirectionalBulletsData2D"/>
+			<param index="1" name="inherited_velocity_offset" type="Vector2" default="Vector2(0, 0)" />
 			
 			
-			<param index="1" name="inherited_velocity_offset" type="Vector2" default="Vector2(0, 0)"/>
-			
-			
-			<description>生成用于控制和编辑的 DirectionalBullets2D。
-				如果对象池中有可用的多重网格，那么它将与新数据一起重新使用。
-				如果您想要引导子弹或在运行时编辑属性，请使用。
-
-				警告：由于默认情况下启用对象池，如果将这些项目符号保存到数组中，您可能会
-				意外地推送完全相同的多重网格（您最终会得到 2 个或更多对同一对象的引用），
-				这就是为什么如果您将它们存储在数组或其他数据结构中，则禁用自动池是明智的做法 - 这样您甚至可以实现自己的池系统。</description>
+			<description>生成用于控制和编辑的 DirectionalBullets2D。 如果对象池中有可用的多重网格体，那么它将与新数据一起重新使用。 如果您想要引导子弹或在运行时编辑属性，请使用。 警告：由于默认情况下启用对象池，如果将这些项目符号保存到数组中，您可能会 意外地推送完全相同的多重网格体（您最终会得到 2 个或更多对同一对象的引用）， 这就是为什么如果您将它们存储在数组或其他数据结构中，则禁用自动池是明智的做法 - 这样您甚至可以实现自己的池系统。</description>
 			
 		
 		</method>
 		
 		
-		<method name="spawn_directional_bullets">
+		<method name="spawn_directional_bullets"><return type="void" />
 			
 			
-			<return type="void"/>
+			<param index="0" name="spawn_data" type="DirectionalBulletsData2D" />
 			
 			
-			<param index="0" name="spawn_data" type="DirectionalBulletsData2D"/>
+			<param index="1" name="inherited_velocity_offset" type="Vector2" default="Vector2(0, 0)" />
 			
 			
-			<param index="1" name="inherited_velocity_offset" type="Vector2" default="Vector2(0, 0)"/>
-			
-			
-			<description>生成 [DirectionalBullets2D] - 具有由其变换的旋转确定的单独方向的子弹。
-				如果对象池中已经存在可用的多重网格（与提供的变换量匹配），则它将与新数据一起重新使用。
-				要单独控制这些子弹，请使用 [方法spawn_controllable_direction_bullets] 函数。</description>
+			<description>生成 [DirectionalBullets2D] - 具有由其变换的旋转确定的单独方向的子弹。 如果对象池中已经存在可用的多重网格体（与提供的变换量匹配），则它将与新数据一起重新使用。 要单独控制这些子弹，请使用 [方法spawn_controllable_direction_bullets] 函数。</description>
 			
 		
 		</method>
 		
 		
-		<method name="teleport_shift_all_bullets">
+		<method name="teleport_shift_all_bullets"><return type="void" />
 			
 			
-			<return type="void"/>
-			
-			
-			<param index="0" name="shift_amount" type="Vector2"/>
+			<param index="0" name="shift_amount" type="Vector2" />
 			
 			
 			<description>将场景中的所有子弹移动一定量（仅由该特定 [b]BulletFactory2D[/b] 生成的子弹）。</description>
@@ -435,9 +342,7 @@
 		<member name="is_factory_processing_bullets" type="bool" setter="set_is_factory_processing_bullets" getter="get_is_factory_processing_bullets" default="true">如果您想暂停项目符号的处理，请使用此选项 - 能够将项目符号停止到位。始终使用它而不是[code]set_process[/code]/[code]set_physical_process[/code]。</member>
 		
 		
-		<member name="use_physics_interpolation" type="bool" setter="set_use_physics_interpolation_editor" getter="get_use_physics_interpolation" default="false">确定是否启用物理插值。 setter 仅供编辑者使用。
-
-			如果您在运行时进行更改，请始终使用 [method set_use_physical_interpolation_runtime]。</member>
+		<member name="use_physics_interpolation" type="bool" setter="set_use_physics_interpolation_editor" getter="get_use_physics_interpolation" default="false">确定是否启用物理插值。 setter 仅供编辑者使用。 如果您在运行时进行更改，请始终使用 [method set_use_physical_interpolation_runtime]。</member>
 		
 	
 	</members>
@@ -446,22 +351,19 @@
 	<signals>
 		
 		
-		<signal name="area_entered">
+		<signal name="area_entered"><param index="0" name="hit_target_area" type="Object" />
 			
 			
-			<param index="0" name="hit_target_area" type="Object"/>
+			<param index="1" name="multimesh_bullets_instance" type="MultiMeshBullets2D" />
 			
 			
-			<param index="1" name="multimesh_bullets_instance" type="MultiMeshBullets2D"/>
+			<param index="2" name="bullet_index" type="int" />
 			
 			
-			<param index="2" name="bullet_index" type="int"/>
+			<param index="3" name="bullets_custom_data" type="Resource" />
 			
 			
-			<param index="3" name="bullets_custom_data" type="Resource"/>
-			
-			
-			<param index="4" name="bullet_global_transform" type="Transform2D"/>
+			<param index="4" name="bullet_global_transform" type="Transform2D" />
 			
 			
 			<description>当子弹进入物理区域时发射。</description>
@@ -470,45 +372,37 @@
 		</signal>
 		
 		
-		<signal name="body_entered">
+		<signal name="body_entered"><param index="0" name="hit_target_body" type="Object" />
 			
 			
-			<param index="0" name="hit_target_body" type="Object"/>
+			<param index="1" name="multimesh_bullets_instance" type="MultiMeshBullets2D" />
 			
 			
-			<param index="1" name="multimesh_bullets_instance" type="MultiMeshBullets2D"/>
+			<param index="2" name="bullet_index" type="int" />
 			
 			
-			<param index="2" name="bullet_index" type="int"/>
+			<param index="3" name="bullets_custom_data" type="Resource" />
 			
 			
-			<param index="3" name="bullets_custom_data" type="Resource"/>
+			<param index="4" name="bullet_global_transform" type="Transform2D" />
 			
 			
-			<param index="4" name="bullet_global_transform" type="Transform2D"/>
-			
-			
-			<description>当子弹进入物理体时发射。
-
-				注意：静态物体可以被子弹检测到，但前提是您在生成子弹时将 [MultiMeshBulletsData2D] 的 [member MultiMeshBulletsData2D.monitorable] 属性设置为 [code]true[/code] - 当然，这是以性能为代价的，因此最好坚持使用 [Area2D] 或其他类型的物体来处理敌人/建筑物等，并保留 [member MultiMeshBulletsData2D.monitorable] 属性是假的。</description>
+			<description>当子弹进入物理体时发射。 注意：静态物体可以被子弹检测到，但前提是您在生成子弹时将 [MultiMeshBulletsData2D] 的 [member MultiMeshBulletsData2D.monitorable] 属性设置为 [code]true[/code] - 当然，这是以性能为代价的，因此最好坚持使用 [Area2D] 或其他类型的物体来处理敌人/建筑物等，并保留 [member MultiMeshBulletsData2D.monitorable] 属性是假的。</description>
 			
 		
 		</signal>
 		
 		
-		<signal name="life_time_over">
+		<signal name="life_time_over"><param index="0" name="multimesh_bullets_instance" type="MultiMeshBullets2D" />
 			
 			
-			<param index="0" name="multimesh_bullets_instance" type="MultiMeshBullets2D"/>
+			<param index="1" name="bullet_indexes" type="int[]" />
 			
 			
-			<param index="1" name="bullet_indexes" type="int[]"/>
+			<param index="2" name="bullets_custom_data" type="Resource" />
 			
 			
-			<param index="2" name="bullets_custom_data" type="Resource"/>
-			
-			
-			<param index="3" name="bullets_global_transforms" type="Transform2D[]"/>
+			<param index="3" name="bullets_global_transforms" type="Transform2D[]" />
 			
 			
 			<description>当子弹多重网格体的生命周期结束时发出，但前提是 [MultiMeshBulletsData2D] 的 [成员 MultiMeshBulletsData2D.is_life_time_over_signal_enabled] 设置为 [code]true[/code]。</description>
@@ -517,10 +411,7 @@
 		</signal>
 		
 		
-		<signal name="reset_finished">
-			
-			
-			<description>当 [method Reset] 方法完成时发出。</description>
+		<signal name="reset_finished"><description>当 [method Reset] 方法完成时发出。</description>
 			
 		
 		</signal>

@@ -1,28 +1,26 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <class xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="BulletSpeedData2D" inherits="Resource" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
-	<brief_description>
-		包含子弹速度相关数据。
-	</brief_description>
-	<description>
-	</description>
-	<tutorials>
-	</tutorials>
-	<methods>
-		<method name="generate_random_data" qualifiers="static">
-			<return type="BulletSpeedData2D[]" />
-			<param index="0" name="amount_to_generate" type="int" />
-			<param index="1" name="speed_MIN" type="float" />
-			<param index="2" name="speed_MAX" type="float" />
-			<param index="3" name="max_speed_MIN" type="float" />
-			<param index="4" name="max_speed_MAX" type="float" />
-			<param index="5" name="acceleration_MIN" type="float" />
-			<param index="6" name="acceleration_MAX" type="float" />
-			<description>生成随机速度数据。</description>
-		</method>
-	</methods>
-	<members>
-		<member name="acceleration" type="float" setter="set_acceleration" getter="get_acceleration" default="0.0">速度每帧增加的量直至达到 max_speed。</member>
-		<member name="max_speed" type="float" setter="set_max_speed" getter="get_max_speed" default="0.0">子弹可以达到的最大速度。</member>
-		<member name="speed" type="float" setter="set_speed" getter="get_speed" default="0.0">子弹当前的速度。</member>
-	</members>
+  <brief_description>子弹速度数据资源。</brief_description>
+  <description>
+  </description>
+  <tutorials>
+  </tutorials>
+  <methods>
+    <method name="generate_random_data" qualifiers="static">
+      <return type="BulletSpeedData2D[]" />
+      <param index="0" name="amount_to_generate" type="int" />
+      <param index="1" name="speed_MIN" type="float" />
+      <param index="2" name="speed_MAX" type="float" />
+      <param index="3" name="max_speed_MIN" type="float" />
+      <param index="4" name="max_speed_MAX" type="float" />
+      <param index="5" name="acceleration_MIN" type="float" />
+      <param index="6" name="acceleration_MAX" type="float" />
+      <description>生成随机的速度数据。</description>
+    </method>
+  </methods>
+  <members>
+    <member name="acceleration" type="float" setter="set_acceleration" getter="get_acceleration" default="0.0">每帧速度增加的量，直到达到最大速度。</member>
+    <member name="max_speed" type="float" setter="set_max_speed" getter="get_max_speed" default="0.0">子弹可以达到的最大速度。</member>
+    <member name="speed" type="float" setter="set_speed" getter="get_speed" default="0.0">子弹的当前速度。</member>
+  </members>
 </class>

@@ -1,37 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <class name="DirectionalBullets2D" inherits="MultiMeshBullets2D" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
-	<brief_description>
-		基于变换旋转沿不同方向移动的子弹。始终使用[BulletFactory2D]来生成它们，这是唯一正确的方式。
-	</brief_description>
-	<description>
-		[DirectionalBullets2D] extends [MultiMeshBullets2D] with advanced homing capabilities. It supports per-bullet homing deques for individualized target chasing (e.g., specific enemies) and a shared deque for uniform swarm behaviors (e.g., collective waypoint following). Targets can be global positions, Node2D instances, or mouse position, with optional auto-pop on reach (see [member bullet_homing_auto_pop_after_target_reached], [member shared_homing_deque_auto_pop_after_target_reached], [signal bullet_homing_target_reached]), smoothing for natural turning (see [member homing_smoothing]), distance before reached - [member homing_distance_before_reached] and update time interval (see [member homing_update_interval]). Enables complex bullet patterns in 2D games.
-
-		Warning: Never use [code]get_tree().create_timer()[/code] or any other godot timers with this class. It will cause issues with the internal timing of the bullets. If you need timers, use [method MultiMeshBullets2D.multimesh_attach_time_based_function] instead.
-
-		Warning: When editing runtime properties or calling methods that edit the multimesh always use [method Object.call_deferred] to avoid issues. The only exception to this are callables attached via [method MultiMeshBullets2D.multimesh_attach_time_based_function], since those are executed at the end of the frame by default for safety.
-
-		Warning: Homing functionality can be done in two ways - either using [b]per-bullet homing deques[/b] (each bullet has its own deque of homing targets) or a [b]shared homing deque[/b] (each bullet shares the same shared deque). Both are supported and if both are used then the shared deque takes precedence over the per-bullet ones. Meaning that if the shared deque has any targets in it then all bullets will follow that one instead of their own individual targets. Any method or property that mentions "shared" is related to the shared deque.
-
-		Note: Deque means double ended queue (you can push and pop from both ends), the homing target at the front is always the one being followed.
-
-		Note: Bullets can orbit around their current homing target if enabled (see [method bullet_enable_orbiting], [method all_bullets_enable_orbiting]). Orbiting requires having a valid homing target to orbit around. Be aware that orbiting does not care about the difference between a shared homing deque or a per bullet deque, as long as there is a target to orbit around it will work.
-
-		Note: Instead of [BulletSpeedData2D] with [method MultiMeshBullets2D.set_bullet_speed_data] you can take advantage of [BulletCurvesData2D] by using [method MultiMeshBullets2D.bullet_set_curves_data], [method MultiMeshBullets2D.all_bullets_set_curves_data] or [member shared_bullet_curves_data] if you want a shared curve for all bullets.
-
-		Note: For [Path2D] drawn bullet patterns try using [method MultiMeshBullets2D.set_bullet_movement_pattern_from_path] or [method MultiMeshBullets2D.set_bullet_movement_pattern_from_curve].
-
-		Note: For bullet attachments (particles, lights, etc...) use [BulletAttachment2D] and attach them via [method MultiMeshBullets2D.bullet_set_attachment] or [method MultiMeshBullets2D.all_bullets_set_attachment].
-
-		Note: For initial velocity/inertia use [member MultiMeshBullets2D.inherited_velocity_offset].
-
-		Note: For custom data that the multimesh should carry use [method MultiMeshBullets2D.bullets_custom_data] - used for damage or anything else custom that is available in collision callbacks inside [BulletFactory2D].
-
-		Note: For object pooling options see [member MultiMeshBullets2D.is_multimesh_auto_pooling_enabled] and [member MultiMeshBullets2D.is_attachments_auto_pooling_enabled].
-
+	<brief_description>基于沿着不同方向移动的变换旋转。始终使用[BulletFactory2D]来生成子弹，这是唯一正确的方式。</brief_description>
+	<description>[DirectionalBullets2D] 通过高级归位功能扩展了 [MultiMeshBullets2D]。它支持用于个性化目标追逐（例如，特定敌人）的每颗子弹归航双端队列和用于统一群体行为（例如，集体航路点跟踪）的共享双端队列。目标可以是全局位置、Node2D 实例或鼠标位置，可选的到达时自动弹出（请参阅[成员bullet_homing_auto_pop_after_target_reached]、[成员shared_homing_deque_auto_pop_after_target_reached]、[信号bullet_homing_target_reached]）、平滑自然转向（请参阅[成员homing_smoothing]）、到达之前的距离 - [成员homing_distance_before_reached]和更新时间间隔（参见[成员homing_update_interval]）。在 2D 游戏中启用复杂的子弹图案。
+		警告：切勿在此类中使用 [code]get_tree().create_timer()[/code] 或任何其他 godot 计时器。这会导致子弹的内部计时出现问题。如果您需要计时器，请改用[方法 MultiMeshBullets2D.multimesh_attach_time_based_function]。
+		警告：编辑运行时属性或调用编辑多重网格的方法时，请始终使用 [方法 Object.call_deferred] 以避免出现问题。唯一的例外是通过[方法 MultiMeshBullets2D.multimesh_attach_time_based_function] 附加的可调用函数，因为为了安全起见，默认情况下这些函数是在帧末尾执行的。
+		警告：归位功能可以通过两种方式完成 - 使用[b]每个项目符号归位双端队列[/b]（每个项目符号都有自己的归位目标双端队列）或[b]共享归位双端队列[/b]（每个项目符号共享相同的共享双端队列）。两者都受支持，如果两者都使用，则共享双端队列优先于按项目符号双端队列。这意味着如果共享双端队列中有任何目标，那么所有子弹都会跟随该目标，而不是各自的目标。任何提到“共享”的方法或属性都与共享双端队列相关。
+		注意：Deque 表示双端队列（可以从两端压入和弹出），最前面的归位目标始终是被跟随的目标。
+		注意：如果启用，子弹可以绕其当前归航目标运行（请参阅[方法bullet_enable_orbiting]，[方法all_bullets_enable_orbiting]）。轨道运行需要有一个有效的寻的目标围绕轨道运行。请注意，轨道运行并不关心共享归航双端队列或每个子弹双端队列之间的差异，只要有一个目标围绕它运行即可。
+		注意：如果您想要共享曲线，则可以使用[方法MultiMeshBullets2D.bullet_set_curves_data]、[方法MultiMeshBullets2D.all_bullet_set_curves_data]或[成员shared_bullet_curves_data]来利用[BulletCurvesData2D]，而不是[BulletSpeedData2D]和[方法MultiMeshBullets2D.set_bullet_speed_data]所有子弹。
+		注意：对于[Path2D]绘制的子弹图案，请尝试使用[方法MultiMeshBullets2D.set_bullet_movement_pattern_from_path]或[方法MultiMeshBullets2D.set_bullet_movement_pattern_from_curve]。
+		注意：对于子弹附件（粒子、灯光等），请使用 [BulletAttachment2D] 并通过 [方法 MultiMeshBullets2D.bullet_set_attachment] 或 [方法 MultiMeshBullets2D.all_bullets_set_attachment] 附加它们。
+		注意：对于初始速度/惯性，请使用[成员 MultiMeshBullets2D.inherited_velocity_offset]。
+		注意：对于多重网格体应携带的自定义数据，请使用 [MultiMeshBullets2D.bullets_custom_data] 方法 - 用于损坏或 [BulletFactory2D] 内的碰撞回调中可用的任何其他自定义数据。
+		注意：有关对象池选项，请参阅[成员 MultiMeshBullets2D.is_multimesh_auto_pooling_enabled] 和 [成员 MultiMeshBullets2D.is_attachments_auto_pooling_enabled]。
 		注意：子弹可以被设置为多次碰撞 - 使用[member MultiMeshBullets2D.bullet_max_collision_count]和[member MultiMeshBullets2D.bullets_current_collision_count]。
-
-		注意：子弹可以有动画纹理，你可以通过[method MultiMeshBullets2D.set_textures]在它们之间切换。
-	</description>
+		注意：子弹可以有纹理动画，你可以通过[方法MultiMeshBullets2D.set_textures]在它们之间切换。</description>
 	<tutorials>
 	</tutorials>
 	<methods>
@@ -39,19 +22,14 @@
 			<return type="void" />
 			<param index="0" name="bullet_index_start" type="int" default="0" />
 			<param index="1" name="bullet_index_end_inclusive" type="int" default="-1" />
-			<description>
-				Clears all homing targets for the specified range of bullets (per-bullet deques only; shared deque unaffected).
-
-				If you want to clear all bullet targets for a shared deque, use [method shared_homing_deque_clear_homing_targets] instead.
-			</description>
+			<description>清除指定范围的子弹的所有归位目标（仅限每个子弹双端队列；共享双端队列不受影响）。
+				如果要清除共享双端队列的所有项目符号目标，请改用[方法shared_homing_deque_clear_homing_targets]。</description>
 		</method>
 		<method name="all_bullets_disable_orbiting">
 			<return type="void" />
 			<param index="0" name="bullet_index_start" type="int" default="0" />
 			<param index="1" name="bullet_index_end_inclusive" type="int" default="-1" />
-			<description>
-				Disables orbiting for the specified range of bullets.
-			</description>
+			<description>禁用指定范围子弹的轨道运行。</description>
 		</method>
 		<method name="all_bullets_enable_orbiting">
 			<return type="void" />
@@ -60,183 +38,131 @@
 			<param index="2" name="orbiting_texture_rotation" type="int" enum="DirectionalBullets2D.OrbitingTextureRotation" />
 			<param index="3" name="bullet_index_start" type="int" default="0" />
 			<param index="4" name="bullet_index_end_inclusive" type="int" default="-1" />
-			<description>
-				Enables orbiting for the specified range of bullets with the given parameters.
-
-				Note that orbiting relies on having a homing target to orbit around.
-			</description>
+			<description>使用给定参数启用指定范围的子弹的轨道运行。
+				请注意，轨道运行依赖于有一个绕轨道运行的寻的目标。</description>
 		</method>
 		<method name="all_bullets_pop_back_target">
 			<return type="Array" />
 			<param index="0" name="bullet_index_start" type="int" default="0" />
 			<param index="1" name="bullet_index_end_inclusive" type="int" default="-1" />
-			<description>
-				Pops a homing target from the back of the deque for all bullets in the range (per-bullet deques only).
-
-				Returns an array of popped targets.
-			</description>
+			<description>从范围内所有子弹的双端队列后面弹出一个归航目标（仅限每个子弹双端队列）。
+				返回弹出目标的数组。</description>
 		</method>
 		<method name="all_bullets_pop_front_target">
 			<return type="Array" />
 			<param index="0" name="bullet_index_start" type="int" default="0" />
 			<param index="1" name="bullet_index_end_inclusive" type="int" default="-1" />
-			<description>
-				Pops a homing target from the front of the deque for all bullets in the range (per-bullet deques only).
-
-				Returns an array of popped targets.
-			</description>
+			<description>从范围内所有子弹的双端队列前面弹出一个归航目标（仅限每个子弹双端队列）。
+				返回弹出目标的数组。</description>
 		</method>
 		<method name="all_bullets_push_back_homing_target">
 			<return type="void" />
 			<param index="0" name="node2d_or_global_position" type="Variant" />
 			<param index="1" name="bullet_index_start" type="int" default="0" />
 			<param index="2" name="bullet_index_end_inclusive" type="int" default="-1" />
-			<description>
-				This is a helper that allows you to push a single homing target(Node2D or Vector2 global position) to the back of the deque for all bullets in the range (per-bullet deques only).
-
-				If you want to push back a target to the shared deque, use [method shared_homing_deque_push_back_global_position_target], [method shared_homing_deque_push_back_node2d_target] or [method shared_homing_deque_push_back_mouse_position_target] instead.
-			</description>
+			<description>这是一个帮助程序，允许您将单个归位目标（Node2D 或 Vector2 全局位置）推送到范围内所有项目符号的双端队列的后面（仅限每个项目符号双端队列）。
+				如果要将目标推回到共享双端队列，请改用[方法shared_homing_deque_push_back_global_position_target]、[方法shared_homing_deque_push_back_node2d_target]或[方法shared_homing_deque_push_back_mouse_position_target]。</description>
 		</method>
 		<method name="all_bullets_push_back_homing_targets_array">
 			<return type="void" />
 			<param index="0" name="node2ds_or_global_positions_array" type="Array" />
 			<param index="1" name="bullet_index_start" type="int" default="0" />
 			<param index="2" name="bullet_index_end_inclusive" type="int" default="-1" />
-			<description>
-				Pushes an array of homing targets (mix of Node2D and Vector2) to the back of the deque for all bullets in the range (per-bullet deques only).
-
-				If you want to push back targets to the shared deque, use [method shared_homing_deque_push_back_homing_targets_array] instead.
-			</description>
+			<description>将一系列归位目标（Node2D 和 Vector2 的混合）推送到范围内所有项目符号的双端队列的后面（仅限每个项目符号双端队列）。
+				如果要将目标推回到共享双端队列，请改用[方法shared_homing_deque_push_back_homing_targets_array]。</description>
 		</method>
 		<method name="all_bullets_push_back_mouse_position_target">
 			<return type="void" />
 			<param index="0" name="bullet_index_start" type="int" default="0" />
 			<param index="1" name="bullet_index_end_inclusive" type="int" default="-1" />
-			<description>
-				Pushes the current mouse global position as a homing target to the back of the deque for all bullets in the range (per-bullet deques only).
-
-				If you want to push back a mouse position target to the shared deque, use [method shared_homing_deque_push_back_mouse_position_target] instead.
-			</description>
+			<description>将当前鼠标全局位置作为归位目标推到范围内所有项目符号双端队列的后面（仅限每个项目符号双端队列）。
+				如果要将鼠标位置目标推回到共享双端队列，请改用 [method shared_homing_deque_push_back_mouse_position_target]。</description>
 		</method>
 		<method name="all_bullets_push_front_homing_target">
 			<return type="void" />
 			<param index="0" name="node2d_or_global_position" type="Variant" />
 			<param index="1" name="bullet_index_start" type="int" default="0" />
 			<param index="2" name="bullet_index_end_inclusive" type="int" default="-1" />
-			<description>
-				Pushes a single homing target (Node2D or Vector2 global position) to the front of the deque for all bullets in the range (per-bullet deques only).
-
-				Warning: Pushing to the front changes the current target being followed immediately.
-
-				If you want to push front a target to the shared deque, use [method shared_homing_deque_push_front_global_position_target], [method shared_homing_deque_push_front_node2d_target] or [method shared_homing_deque_push_front_mouse_position_target] instead.
-			</description>
+			<description>将单个归位目标（Node2D 或 Vector2 全局位置）推送到范围内所有项目符号的双端队列的前面（仅限每个项目符号双端队列）。
+				警告：推到前面会更改立即跟随的当前目标。
+				如果要将目标推到共享双端队列的前面，请改用[方法shared_homing_deque_push_front_global_position_target]、[方法shared_homing_deque_push_front_node2d_target]或[方法shared_homing_deque_push_front_mouse_position_target]。</description>
 		</method>
 		<method name="all_bullets_push_front_homing_targets_array">
 			<return type="void" />
 			<param index="0" name="node2ds_or_global_positions_array" type="Array" />
 			<param index="1" name="bullet_index_start" type="int" default="0" />
 			<param index="2" name="bullet_index_end_inclusive" type="int" default="-1" />
-			<description>
-				Pushes an array of homing targets to the front of the deque for all bullets in the range (per-bullet deques only).
-
-				Warning: Pushing to the front changes the current target being followed immediately.
-
-				If you want to push front targets to the shared deque, use [method shared_homing_deque_push_front_homing_targets_array] instead.
-			</description>
+			<description>将一系列寻的目标推到范围内所有子弹的双端队列的前面（仅限每个子弹双端队列）。
+				警告：推到前面会更改立即跟随的当前目标。
+				如果要将前端目标推送到共享双端队列，请改用[方法shared_homing_deque_push_front_homing_targets_array]。</description>
 		</method>
 		<method name="all_bullets_push_front_mouse_position_target">
 			<return type="void" />
 			<param index="0" name="bullet_index_start" type="int" default="0" />
 			<param index="1" name="bullet_index_end_inclusive" type="int" default="-1" />
-			<description>
-				Pushes the current mouse global position to the front of the deque for all bullets in the range (per-bullet deques only).
-
-				Warning: Pushing to the front changes the current target being followed immediately.
-
-				If you want to push front a mouse position target to the shared deque, use [method shared_homing_deque_push_front_mouse_position_target] instead.
-			</description>
+			<description>将当前鼠标全局位置推到范围内所有项目符号双端队列的前面（仅限每个项目符号双端队列）。
+				警告：推到前面会更改立即跟随的当前目标。
+				如果您想将鼠标位置目标推到共享双端队列的前面，请改用[方法shared_homing_deque_push_front_mouse_position_target]。</description>
 		</method>
 		<method name="all_bullets_replace_homing_targets_with_mouse">
 			<return type="void" />
 			<param index="0" name="bullet_index_start" type="int" default="0" />
 			<param index="1" name="bullet_index_end_inclusive" type="int" default="-1" />
-			<description>
-				Each homing target gets cleared and replaced with the Mouse as the target for all bullets in the range (per-bullet deques only).
-			</description>
+			<description>每个归航目标都会被清除并替换为鼠标作为范围内所有子弹的目标（仅限每个子弹双端队列）。</description>
 		</method>
 		<method name="all_bullets_replace_homing_targets_with_new_target">
 			<return type="void" />
 			<param index="0" name="node2d_or_global_position" type="Variant" />
 			<param index="1" name="bullet_index_start" type="int" default="0" />
 			<param index="2" name="bullet_index_end_inclusive" type="int" default="-1" />
-			<description>
-				Clears then pushes a single homing target to the back for all bullets in the range (per-bullet deques only).
-
-				If you want to clear then push a single target to the shared deque, use [method shared_homing_deque_replace_homing_targets_with_new_target] instead.
-			</description>
+			<description>清除然后将范围内所有子弹的单个寻的目标推到后面（仅限每个子弹双端队列）。
+				如果您想清除然后将单个目标推送到共享双端队列，请改用[方法shared_homing_deque_replace_homing_targets_with_new_target]。</description>
 		</method>
 		<method name="all_bullets_replace_homing_targets_with_new_target_array">
 			<return type="void" />
 			<param index="0" name="node2ds_or_global_positions_array" type="Array" />
 			<param index="1" name="bullet_index_start" type="int" default="0" />
 			<param index="2" name="bullet_index_end_inclusive" type="int" default="-1" />
-			<description>
-				Clears then pushes an array of homing targets to the back for all bullets in the range (per-bullet deques only).
-
-				If you want to clear then push an array of targets to the shared deque, use [method shared_homing_deque_replace_homing_targets_with_new_target_array] instead.
-			</description>
+			<description>然后，清除将范围内所有子弹的一系列寻的目标推到后面（仅限每个子弹双端队列）。
+				如果您想清除然后将目标数组推送到共享双端队列，请改用[方法shared_homing_deque_replace_homing_targets_with_new_target_array]。</description>
 		</method>
 		<method name="all_bullets_set_orbiting_direction">
 			<return type="void" />
 			<param index="0" name="new_direction" type="int" enum="DirectionalBullets2D.OrbitingDirection" />
 			<param index="1" name="bullet_index_start" type="int" default="0" />
 			<param index="2" name="bullet_index_end_inclusive" type="int" default="-1" />
-			<description>
-				Sets the orbiting direction for all bullets in the range.
-			</description>
+			<description>设置范围内所有子弹的轨道方向。</description>
 		</method>
 		<method name="all_bullets_set_orbiting_radius">
 			<return type="void" />
 			<param index="0" name="new_radius" type="float" />
 			<param index="1" name="bullet_index_start" type="int" default="0" />
 			<param index="2" name="bullet_index_end_inclusive" type="int" default="-1" />
-			<description>
-				Sets the orbiting radius for all bullets in the range.
-			</description>
+			<description>设置范围内所有子弹的轨道半径。</description>
 		</method>
 		<method name="all_bullets_set_orbiting_texture_rotation">
 			<return type="void" />
 			<param index="0" name="new_rotation" type="int" enum="DirectionalBullets2D.OrbitingTextureRotation" />
 			<param index="1" name="bullet_index_start" type="int" default="0" />
 			<param index="2" name="bullet_index_end_inclusive" type="int" default="-1" />
-			<description>
-				Sets the orbiting texture rotation for all bullets in the range.
-			</description>
+			<description>设置范围内所有子弹的轨道纹理旋转。</description>
 		</method>
 		<method name="bullet_check_has_homing_targets" qualifiers="const">
 			<return type="bool" />
 			<param index="0" name="bullet_index" type="int" />
-			<description>
-				Returns true if the specified bullet has any homing targets in its per-bullet deque.
-
-				If you want to check if the shared deque has any targets, use [method shared_homing_deque_check_has_homing_targets] instead.
-			</description>
+			<description>如果指定的项目符号在其每个项目符号双端队列中有任何归航目标，则返回 true。
+				如果您想检查共享双端队列是否有任何目标，请改用[method shared_homing_deque_check_has_homing_targets]。</description>
 		</method>
 		<method name="bullet_clear_homing_targets">
 			<return type="void" />
 			<param index="0" name="bullet_index" type="int" />
-			<description>
-				Clears all homing targets from the specified bullet's per-bullet deque. Resets individual path; shared unaffected.
-
-				If you want to clear all bullet targets for a shared deque, use [method shared_homing_deque_clear_homing_targets] instead.
-			</description>
+			<description>从指定项目符号的每项目符号双端队列中清除所有归航目标。重置个人路径；共享不受影响。
+				如果要清除共享双端队列的所有项目符号目标，请改用[方法shared_homing_deque_clear_homing_targets]。</description>
 		</method>
 		<method name="bullet_disable_orbiting">
 			<return type="void" />
 			<param index="0" name="bullet_index" type="int" />
-			<description>
-				Disables orbiting for the specified bullet.
-			</description>
+			<description>禁用指定子弹的轨道运行。</description>
 		</method>
 		<method name="bullet_enable_orbiting">
 			<return type="void" />
@@ -244,374 +170,244 @@
 			<param index="1" name="orbiting_radius" type="float" />
 			<param index="2" name="orbiting_direction" type="int" enum="DirectionalBullets2D.OrbitingDirection" />
 			<param index="3" name="orbiting_texture_rotation" type="int" enum="DirectionalBullets2D.OrbitingTextureRotation" />
-			<description>
-				Enables orbiting for the specified bullet with the given parameters.
-
-				Note that orbiting relies on having a homing target to orbit around.
-			</description>
+			<description>使用给定参数启用指定子弹的轨道运行。
+				请注意，轨道运行依赖于有一个绕轨道运行的寻的目标。</description>
 		</method>
 		<method name="bullet_get_current_homing_target" qualifiers="const">
 			<return type="Variant" />
 			<param index="0" name="bullet_index" type="int" />
-			<description>
-				Returns the current (front) homing target for the specified bullet's per-bullet deque as Variant (Node2D or Vector2; nullptr if invalid/empty).
-
-				If you want to get the current target from the shared deque, use [method shared_homing_deque_get_current_homing_target] instead.
-			</description>
+			<description>返回指定项目符号的每个项目符号双端队列的当前（前）归位目标作为 Variant（Node2D 或 Vector2；如果无效/空则为 nullptr）。
+				如果你想从共享双端队列中获取当前目标，请使用[方法shared_homing_deque_get_current_homing_target]。</description>
 		</method>
 		<method name="bullet_get_orbiting_direction">
 			<return type="int" enum="DirectionalBullets2D.OrbitingDirection" />
 			<param index="0" name="bullet_index" type="int" />
-			<description>
-				Returns the orbiting direction for the specified bullet.
-			</description>
+			<description>返回指定子弹的轨道方向。</description>
 		</method>
 		<method name="bullet_get_orbiting_radius">
 			<return type="float" />
 			<param index="0" name="bullet_index" type="int" />
-			<description>
-				Returns the orbiting radius for the specified bullet.
-			</description>
+			<description>返回指定子弹的轨道半径。</description>
 		</method>
 		<method name="bullet_get_orbiting_texture_rotation">
 			<return type="int" enum="DirectionalBullets2D.OrbitingTextureRotation" />
 			<param index="0" name="bullet_index" type="int" />
-			<description>
-				Returns the orbiting texture rotation for the specified bullet.
-			</description>
+			<description>返回指定项目符号的轨道纹理旋转。</description>
 		</method>
 		<method name="bullet_homing_check_current_target_type" qualifiers="const">
 			<return type="int" enum="BlastBullets2D.HomingType" />
 			<param index="0" name="bullet_index" type="int" />
-			<description>
-				Returns the type of the current (front) homing target for the specified bullet's per-bullet deque (NotHoming if empty).
-
-				If you want to check the type of the current target from the shared deque, use [method shared_homing_deque_check_current_target_type] instead.
-			</description>
+			<description>返回指定项目符号的每个项目符号双端队列的当前（前）归位目标的类型（如果为空则为 NotHoming）。
+				如果要从共享双端队列检查当前目标的类型，请改用[method shared_homing_deque_check_current_target_type]。</description>
 		</method>
 		<method name="bullet_homing_check_targets_amount" qualifiers="const">
 			<return type="int" />
 			<param index="0" name="bullet_index" type="int" />
-			<description>
-				Returns the number of homing targets in the specified bullet's per-bullet deque.
-
-				If you want to check the number of targets in the shared deque, use [method shared_homing_deque_check_homing_targets_amount] instead.
-			</description>
+			<description>返回指定项目符号的每个项目符号双端队列中的归航目标数。
+				如果您想检查共享双端队列中的目标数量，请改用[方法shared_homing_deque_check_homing_targets_amount]。</description>
 		</method>
 		<method name="bullet_homing_pop_back_target">
 			<return type="Variant" />
 			<param index="0" name="bullet_index" type="int" />
-			<description>
-				Pops and returns the back homing target from the specified bullet's per-bullet deque (Variant: Node2D or Vector2; nullptr if invalid/empty).
-
-				If you want to pop the back target from the shared deque, use [method shared_homing_deque_pop_back_target] instead.
-			</description>
+			<description>从指定项目符号的每个项目符号双端队列中弹出并返回返回目标（变体：Node2D 或 Vector2；如果无效/空，则返回 nullptr）。
+				如果您想从共享双端队列中弹出后置目标，请改用[method shared_homing_deque_pop_back_target]。</description>
 		</method>
 		<method name="bullet_homing_pop_front_target">
 			<return type="Variant" />
 			<param index="0" name="bullet_index" type="int" />
-			<description>
-				Pops and returns the front (current) homing target from the specified bullet's per-bullet deque (Variant: Node2D or Vector2; nullptr if invalid/empty).
-
-				If you want to pop the front target from the shared deque, use [method shared_homing_deque_pop_front_target] instead.
-			</description>
+			<description>从指定项目符号的每个项目符号双端队列中弹出并返回前（当前）归位目标（变体：Node2D 或 Vector2；如果无效/空，则返回 nullptr）。
+				如果您想从共享双端队列中弹出前端目标，请改用[method shared_homing_deque_pop_front_target]。</description>
 		</method>
 		<method name="bullet_homing_push_back_global_position_target">
 			<return type="bool" />
 			<param index="0" name="bullet_index" type="int" />
 			<param index="1" name="global_position" type="Vector2" />
-			<description>
-				Pushes a global position target to the back of the specified bullet's per-bullet deque. Returns true on success (bullet enabled/valid index).
-
-				If you want to push back a target to the shared deque, use [method shared_homing_deque_push_back_global_position_target] instead.
-			</description>
+			<description>将全局位置目标推到指定项目符号的每个项目符号双端队列的后面。成功时返回 true（项目符号启用/有效索引）。
+				如果要将目标推回到共享双端队列，请改用[方法shared_homing_deque_push_back_global_position_target]。</description>
 		</method>
 		<method name="bullet_homing_push_back_mouse_position_target">
 			<return type="bool" />
 			<param index="0" name="bullet_index" type="int" />
-			<description>
-				Pushes the current mouse global position to the back of the specified bullet's per-bullet deque. Returns true on success; caches for perf.
-
-				If you want to push back a mouse position target to the shared deque, use [method shared_homing_deque_push_back_mouse_position_target] instead.
-			</description>
+			<description>将当前鼠标全局位置推到指定项目符号的每项目符号双端队列的后面。成功则返回 true；性能缓存。
+				如果要将鼠标位置目标推回到共享双端队列，请改用 [method shared_homing_deque_push_back_mouse_position_target]。</description>
 		</method>
 		<method name="bullet_homing_push_back_node2d_target">
 			<return type="bool" />
 			<param index="0" name="bullet_index" type="int" />
 			<param index="1" name="new_homing_target" type="Node2D" />
-			<description>
-				Pushes a Node2D target to the back of the specified bullet's per-bullet deque. Returns true on success (bullet enabled/valid index/target).
-
-				If you want to push back a target to the shared deque, use [method shared_homing_deque_push_back_node2d_target] instead.
-			</description>
+			<description>将 Node2D 目标推送到指定项目符号的每项目符号双端队列的后面。成功时返回 true（项目符号已启用/有效索引/目标）。
+				如果要将目标推回到共享双端队列，请改用[方法shared_homing_deque_push_back_node2d_target]。</description>
 		</method>
 		<method name="bullet_homing_push_front_global_position_target">
 			<return type="bool" />
 			<param index="0" name="bullet_index" type="int" />
 			<param index="1" name="global_position" type="Vector2" />
-			<description>
-				Pushes a global position target to the front of the specified bullet's per-bullet deque. Returns true on success (bullet enabled/valid index).
-
-				If you want to push front a target to the shared deque, use [method shared_homing_deque_push_front_global_position_target] instead.
-			</description>
+			<description>将全局位置目标推到指定项目符号的每个项目符号双端队列的前面。成功时返回 true（项目符号启用/有效索引）。
+				如果要将目标推到共享双端队列的前面，请改用[方法shared_homing_deque_push_front_global_position_target]。</description>
 		</method>
 		<method name="bullet_homing_push_front_mouse_position_target">
 			<return type="bool" />
 			<param index="0" name="bullet_index" type="int" />
-			<description>
-				Pushes the current mouse global position to the front of the specified bullet's per-bullet deque. Returns true on success.
-
-				If you want to push front a mouse position target to the shared deque, use [method shared_homing_deque_push_front_mouse_position_target] instead.
-			</description>
+			<description>将当前鼠标全局位置推到指定项目符号的每项目符号双端队列的前面。成功时返回 true。
+				如果您想将鼠标位置目标推到共享双端队列的前面，请改用[方法shared_homing_deque_push_front_mouse_position_target]。</description>
 		</method>
 		<method name="bullet_homing_push_front_node2d_target">
 			<return type="bool" />
 			<param index="0" name="bullet_index" type="int" />
 			<param index="1" name="new_homing_target" type="Node2D" />
-			<description>
-				Pushes a Node2D target to the front of the specified bullet's per-bullet deque. Returns true on success (bullet enabled/valid index/target).
-
-				If you want to push front a target to the shared deque, use [method shared_homing_deque_push_front_node2d_target] instead.
-			</description>
+			<description>将 Node2D 目标推送到指定项目符号的每项目符号双端队列的前面。成功时返回 true（项目符号已启用/有效索引/目标）。
+				如果要将目标推到共享双端队列的前面，请改用[方法shared_homing_deque_push_front_node2d_target]。</description>
 		</method>
 		<method name="bullet_set_orbiting_direction">
 			<return type="void" />
 			<param index="0" name="bullet_index" type="int" />
 			<param index="1" name="new_direction" type="int" enum="DirectionalBullets2D.OrbitingDirection" />
-			<description>
-				Sets the orbiting direction for the specified bullet.
-			</description>
+			<description>设置指定子弹的轨道方向。</description>
 		</method>
 		<method name="bullet_set_orbiting_radius">
 			<return type="void" />
 			<param index="0" name="bullet_index" type="int" />
 			<param index="1" name="new_radius" type="float" />
-			<description>
-				Sets the orbiting radius for the specified bullet.
-			</description>
+			<description>设置指定子弹的轨道半径。</description>
 		</method>
 		<method name="bullet_set_orbiting_texture_rotation">
 			<return type="void" />
 			<param index="0" name="bullet_index" type="int" />
 			<param index="1" name="new_texture_rotation" type="int" enum="DirectionalBullets2D.OrbitingTextureRotation" />
-			<description>
-				Sets the orbiting texture rotation for the specified bullet.
-			</description>
+			<description>设置指定项目符号的轨道纹理旋转。</description>
 		</method>
 		<method name="shared_homing_deque_check_current_target_type" qualifiers="const">
 			<return type="int" enum="BlastBullets2D.HomingType" />
-			<description>
-				Returns the type of the current (front) homing target in the shared deque (NotHoming if empty).
-
-				If you want to check the type of the current target from a specific bullet's per-bullet deque, use [method bullet_homing_check_current_target_type] instead.
-			</description>
+			<description>返回共享双端队列中当前（前面）归位目标的类型（如果为空则为 NotHoming）。
+				如果您想从特定项目符号的每个项目符号双端队列中检查当前目标的类型，请改用[方法bullet_homing_check_current_target_type]。</description>
 		</method>
 		<method name="shared_homing_deque_check_has_homing_targets" qualifiers="const">
 			<return type="bool" />
-			<description>
-				Returns true if the shared deque has any homing targets.
-
-				If you want to check if a specific bullet's per-bullet deque has any targets, use [method bullet_check_has_homing_targets] instead.
-			</description>
+			<description>如果共享双端队列有任何归位目标，则返回 true。
+				如果您想检查特定项目符号的每个项目符号双端队列是否有任何目标，请改用[方法bullet_check_has_homing_targets]。</description>
 		</method>
 		<method name="shared_homing_deque_check_homing_targets_amount" qualifiers="const">
 			<return type="int" />
-			<description>
-				Returns the number of homing targets in the shared deque.
-
-				If you want to check the number of targets in a specific bullet's per-bullet deque, use [method bullet_homing_check_targets_amount] instead.
-			</description>
+			<description>返回共享双端队列中的定位目标的数量。
+				如果您想检查特定项目符号的每个项目符号双端队列中的目标数量，请改用[方法bullet_homing_check_targets_amount]。</description>
 		</method>
 		<method name="shared_homing_deque_clear_homing_targets">
 			<return type="void" />
-			<description>
-				Clears all targets from the shared deque, decrementing mouse counter if applicable. Resets swarm path.
-
-				If you want to clear all homing targets from specific bullets' per-bullet deques, use [method all_bullets_clear_homing_targets] or [method bullet_clear_homing_targets] instead.
-			</description>
+			<description>清除共享双端队列中的所有目标，并减少鼠标计数器（如果适用）。重置集群路径。
+				如果您想从特定子弹的每子弹双端队列中清除所有归航目标，请改用 [method all_bullets_clear_homing_targets] 或 [methodBullet_clear_homing_targets]。</description>
 		</method>
 		<method name="shared_homing_deque_get_current_homing_target" qualifiers="const">
 			<return type="Variant" />
-			<description>
-				Returns the current (front) homing target from the shared deque as Variant (Node2D or Vector2; nullptr if invalid/empty).
-
-				If you want to get the current target from a specific bullet's per-bullet deque, use [method bullet_get_current_homing_target] instead.
-			</description>
+			<description>从共享双端队列返回当前（前端）归位目标作为 Variant（Node2D 或 Vector2；如果无效/空，则返回 nullptr）。
+				如果您想从特定项目符号的每个项目符号双端队列中获取当前目标，请改用[方法bullet_get_current_homing_target]。</description>
 		</method>
 		<method name="shared_homing_deque_pop_back_target">
 			<return type="Variant" />
-			<description>
-				Pops and returns the back homing target from the shared deque (Variant: Node2D or Vector2; nullptr if invalid/empty).
-
-				If you want to pop the back target from a specific bullet's per-bullet deque, use [method bullet_homing_pop_back_target] instead.
-			</description>
+			<description>从共享双端队列中弹出并返回返回目标（变体：Node2D 或 Vector2；如果无效/空，则返回 nullptr）。
+				如果您想从特定项目符号的每个项目符号双端队列中弹出后目标，请改用[方法bullet_homing_pop_back_target]。</description>
 		</method>
 		<method name="shared_homing_deque_pop_front_target">
 			<return type="Variant" />
-			<description>
-				Pops and returns the front (current) homing target from the shared deque (Variant: Node2D target or Vector2; nullptr if invalid/empty).
-
-				If you want to pop the front target from a specific bullet's per-bullet deque, use [method bullet_homing_pop_front_target] instead.
-			</description>
+			<description>弹出并返回共享双端队列中的前（当前）归位目标（变体：Node2D 目标或 Vector2；如果无效/空，则为 nullptr）。
+				如果您想从特定项目符号的每个项目符号双端队列中弹出前目标，请改用[方法bullet_homing_pop_front_target]。</description>
 		</method>
 		<method name="shared_homing_deque_push_back_global_position_target">
 			<return type="void" />
 			<param index="0" name="global_position" type="Vector2" />
-			<description>
-				Pushes a global position target to the back of the shared deque.
-
-				If you want to push back a target to a specific bullet's per-bullet deque, use [method bullet_homing_push_back_global_position_target] instead.
-			</description>
+			<description>将全局位置目标推到共享双端队列的后面。
+				如果您想将目标推回到特定项目符号的每个项目符号双端队列，请改用[方法bullet_homing_push_back_global_position_target]。</description>
 		</method>
 		<method name="shared_homing_deque_push_back_homing_targets_array">
 			<return type="void" />
 			<param index="0" name="node2ds_or_global_positions_array" type="Array" />
-			<description>
-				Pushes an array of homing targets (mix of Node2D and Vector2) to the back of the shared deque.
-
-				If you want to push back targets to a specific bullet's per-bullet deque, use [method all_bullets_push_back_homing_targets_array] instead.
-			</description>
+			<description>将一组归位目标（Node2D 和 Vector2 的混合）推送到共享双端队列的后面。
+				如果要将目标推回特定项目符号的每个项目符号双端队列，请改用 [method all_bullets_push_back_homing_targets_array]。</description>
 		</method>
 		<method name="shared_homing_deque_push_back_mouse_position_target">
 			<return type="void" />
-			<description>
-				Pushes the current mouse global position to the back of the shared deque.
-
-				If you want to push back a mouse position target to a specific bullet's per-bullet deque, use [method bullet_homing_push_back_mouse_position_target] instead.
-			</description>
+			<description>将当前鼠标全局位置推到共享双端队列的后面。
+				如果您想将鼠标位置目标推回到特定项目符号的每个项目符号双端队列，请改用[方法bullet_homing_push_back_mouse_position_target]。</description>
 		</method>
 		<method name="shared_homing_deque_push_back_node2d_target">
 			<return type="void" />
 			<param index="0" name="new_homing_target" type="Node2D" />
-			<description>
-				Pushes a Node2D target to the back of the shared deque.
-
-				If you want to push back a target to a specific bullet's per-bullet deque, use [method bullet_homing_push_back_node2d_target] instead.
-			</description>
+			<description>将 Node2D 目标推送到共享双端队列的后面。
+				如果您想将目标推回到特定项目符号的每个项目符号双端队列，请改用[方法bullet_homing_push_back_node2d_target]。</description>
 		</method>
 		<method name="shared_homing_deque_push_front_global_position_target">
 			<return type="void" />
 			<param index="0" name="global_position" type="Vector2" />
-			<description>
-				Pushes a global position target to the front of the shared deque.
-
-				Warning: Pushing to the front changes the current target being followed immediately.
-
-				If you want to push front a target to a specific bullet's per-bullet deque, use [method bullet_homing_push_front_global_position_target] instead.
-			</description>
+			<description>将全局位置目标推送到共享双端队列的前面。
+				警告：推到前面会更改立即跟随的当前目标。
+				如果您想将目标推到特定项目符号的每个项目符号双端队列中，请改用[方法bullet_homing_push_front_global_position_target]。</description>
 		</method>
 		<method name="shared_homing_deque_push_front_homing_targets_array">
 			<return type="void" />
 			<param index="0" name="node2ds_or_global_positions_array" type="Array" />
-			<description>
-				Pushes an array of homing targets to the front of the shared deque.
-
-				Warning: Pushing to the front changes the current target being followed immediately.
-
-				If you want to push front targets to a specific bullet's per-bullet deque, use [method all_bullets_push_front_homing_targets_array] instead.
-			</description>
+			<description>将一系列定位目标推送到共享双端队列的前面。
+				警告：推到前面会更改立即跟随的当前目标。
+				如果您想将前面的目标推送到特定项目符号的每个项目符号双端队列，请改用 [method all_bullets_push_front_homing_targets_array]。</description>
 		</method>
 		<method name="shared_homing_deque_push_front_mouse_position_target">
 			<return type="void" />
-			<description>
-				Pushes the current mouse global position to the front of the shared deque.
-
-				Warning: Pushing to the front changes the current target being followed immediately.
-
-				If you want to push front a mouse position target to a specific bullet's per-bullet deque, use [method bullet_homing_push_front_mouse_position_target] instead.
-			</description>
+			<description>将当前鼠标全局位置推到共享双端队列的前面。
+				警告：推到前面会更改立即跟随的当前目标。
+				如果您想将鼠标位置目标推到特定项目符号的每个项目符号双端队列中，请改用[方法bullet_homing_push_front_mouse_position_target]。</description>
 		</method>
 		<method name="shared_homing_deque_push_front_node2d_target">
 			<return type="void" />
 			<param index="0" name="new_homing_target" type="Node2D" />
-			<description>
-				Pushes a Node2D target to the front of the shared deque.
-
-				Warning: Pushing to the front changes the current target being followed immediately.
-
-				If you want to push front a target to a specific bullet's per-bullet deque, use [method bullet_homing_push_front_node2d_target] instead.
-			</description>
+			<description>将 Node2D 目标推送到共享双端队列的前面。
+				警告：推到前面会更改立即跟随的当前目标。
+				如果您想将目标推到特定项目符号的每个项目符号双端队列中，请改用[方法bullet_homing_push_front_node2d_target]。</description>
 		</method>
 		<method name="shared_homing_deque_replace_homing_targets_with_new_target">
 			<return type="void" />
 			<param index="0" name="node2d_or_global_position" type="Variant" />
-			<description>
-				Clears then pushes a single homing target to the back of the shared deque.
-
-				If you want to clear then push a single target to a specific bullet's per-bullet deque, use [method all_bullets_replace_homing_targets_with_new_target] instead.
-			</description>
+			<description>然后清除将单个归位目标推送到共享双端队列的后面。
+				如果您想清除然后将单个目标推送到特定项目符号的每个项目符号双端队列，请改用[方法 all_bullets_replace_homing_targets_with_new_target]。</description>
 		</method>
 		<method name="shared_homing_deque_replace_homing_targets_with_new_target_array">
 			<return type="void" />
 			<param index="0" name="node2ds_or_global_positions_array" type="Array" />
-			<description>
-				Clears then pushes an array of homing targets to the back of the shared deque.
-
-				If you want to clear then push an array of targets to a specific bullet's per-bullet deque, use [method all_bullets_replace_homing_targets_with_new_target_array] instead.
-			</description>
+			<description>然后清除将一系列归位目标推送到共享双端队列的后面。
+				如果您想清除然后将目标数组推送到特定项目符号的每个项目符号双端队列，请改用[方法 all_bullets_replace_homing_targets_with_new_target_array]。</description>
 		</method>
 		<method name="teleport_bullet">
 			<return type="void" />
 			<param index="0" name="bullet_index" type="int" />
 			<param index="1" name="new_global_pos" type="Vector2" />
-			<description>
-				Teleports the specified bullet to a new global position.
-			</description>
+			<description>将指定的子弹传送到新的全局位置。</description>
 		</method>
 		<method name="teleport_shift_all_bullets">
 			<return type="void" />
 			<param index="0" name="shift_value" type="Vector2" />
 			<param index="1" name="bullet_index_start" type="int" default="0" />
 			<param index="2" name="bullet_index_end_inclusive" type="int" default="-1" />
-			<description>
-				Shifts the position of all bullets in the specified range by the given offset.
-			</description>
+			<description>将指定范围内所有项目符号的位置移动给定的偏移量。</description>
 		</method>
 		<method name="teleport_shift_bullet">
 			<return type="void" />
 			<param index="0" name="bullet_index" type="int" />
 			<param index="1" name="shift_value" type="Vector2" />
-			<description>
-				Shifts the position of the specified bullet by the given offset.
-			</description>
+			<description>将指定项目符号的位置移动给定的偏移量。</description>
 		</method>
 	</methods>
 	<members>
-		<member name="bullet_homing_auto_pop_after_target_reached" type="bool" setter="set_bullet_homing_auto_pop_after_target_reached" getter="get_bullet_homing_auto_pop_after_target_reached" default="false">
-			Whether the current homing target should be automatically popped from the deque once it gets reached by a bullet (per-bullet deques only).
-
-			Adjust the distance for considering a target reached with [member homing_distance_before_reached].
-
-			The signal [signal bullet_homing_target_reached] is emitted when a target is reached.
-
-			If you want this behavior for the shared deque, use [member shared_homing_deque_auto_pop_after_target_reached] instead.
-		</member>
-		<member name="homing_distance_before_reached" type="float" setter="set_homing_distance_before_reached" getter="get_homing_distance_before_reached" default="5.0">
-			Adjust if you want your bullets to consider a homing target reached if they are within a certain distance away from it.
-
-			The [signal bullet_homing_target_reached] signal is emitted when a target is reached.
-		</member>
-		<member name="homing_smoothing" type="float" setter="set_homing_smoothing" getter="get_homing_smoothing" default="0.0">
-			Adjust this value for natural smooth turning. Test with values [code]0.00-20.00[/code] or even bigger.
-		</member>
-		<member name="homing_take_control_of_texture_rotation" type="bool" setter="set_homing_take_control_of_texture_rotation" getter="get_homing_take_control_of_texture_rotation" default="false">
-			If you set to true then the texture of the bullets will start facing the direction in which it is moving while homing towards a target.
-		</member>
-		<member name="homing_update_interval" type="float" setter="set_homing_update_interval" getter="get_homing_update_interval" default="0.0">
-			How often it should cache the position of the targets so that they can be re-used instead of fetching them every frame. Increase if you want to boost performance.
-		</member>
-		<member name="inherited_velocity_offset" type="Vector2" setter="set_inherited_velocity_offset" getter="get_inherited_velocity_offset" default="Vector2(0, 0)">
-			Use this for initial velocity when the bullets are supposed to inherit velocity from the emitter.
-		</member>
-		<member name="shared_homing_deque_auto_pop_after_target_reached" type="bool" setter="set_shared_homing_deque_auto_pop_after_target_reached" getter="get_shared_homing_deque_auto_pop_after_target_reached" default="false">
-			Whether the current homing target should be automatically popped from the deque once it gets reached by a bullet (per-bullet deques only).
-
-			Adjust the distance for considering a target reached with [member homing_distance_before_reached].
-
-			The signal [signal bullet_homing_target_reached] is emitted when a target is reached.
-
-			If you want this behavior for the per-bullet deques, use [member bullet_homing_auto_pop_after_target_reached] instead.
-		</member>
+		<member name="bullet_homing_auto_pop_after_target_reached" type="bool" setter="set_bullet_homing_auto_pop_after_target_reached" getter="get_bullet_homing_auto_pop_after_target_reached" default="false">一旦子弹到达当前归位目标，是否应自动从双端队列中弹出（仅限每个子弹双端队列）。
+			调整距离以考虑使用 [member homing_distance_before_reached] 达到的目标。
+			当到达目标时，会发出信号[信号bullet_homing_target_reached]。
+			如果您希望共享双端队列具有此行为，请改用 [member shared_homing_deque_auto_pop_after_target_reached]。</member>
+		<member name="homing_distance_before_reached" type="float" setter="set_homing_distance_before_reached" getter="get_homing_distance_before_reached" default="5.0">如果您希望子弹在距目标一定距离内时考虑已到达寻的目标，请进行调整。
+			当到达目标时，会发出 [signalBullet_homing_target_reached] 信号。</member>
+		<member name="homing_smoothing" type="float" setter="set_homing_smoothing" getter="get_homing_smoothing" default="0.0">调整该值以获得自然平滑的转弯。使用值 [code]0.00-20.00[/code] 甚至更大进行测试。</member>
+		<member name="homing_take_control_of_texture_rotation" type="bool" setter="set_homing_take_control_of_texture_rotation" getter="get_homing_take_control_of_texture_rotation" default="false">如果设置为 true，则子弹的纹理将开始面向其在朝目标移动时移动的方向。</member>
+		<member name="homing_update_interval" type="float" setter="set_homing_update_interval" getter="get_homing_update_interval" default="0.0">它应该多久缓存一次目标的位置，以便可以重复使用它们，而不是每帧都获取它们。如果您想提高性能，请增加。</member>
+		<member name="inherited_velocity_offset" type="Vector2" setter="set_inherited_velocity_offset" getter="get_inherited_velocity_offset" default="Vector2(0, 0)">当子弹应该继承发射器的速度时，请使用此值作为初始速度。</member>
+		<member name="shared_homing_deque_auto_pop_after_target_reached" type="bool" setter="set_shared_homing_deque_auto_pop_after_target_reached" getter="get_shared_homing_deque_auto_pop_after_target_reached" default="false">一旦子弹到达当前归位目标，是否应自动从双端队列中弹出（仅限每个子弹双端队列）。
+			调整距离以考虑使用 [member homing_distance_before_reached] 达到的目标。
+			当到达目标时，会发出信号[信号bullet_homing_target_reached]。
+			如果您希望每个项目符号双端队列具有此行为，请改用[成员bullet_homing_auto_pop_after_target_reached]。</member>
 	</members>
 	<signals>
 		<signal name="bullet_homing_target_reached">
@@ -619,15 +415,10 @@
 			<param index="1" name="bullet_index" type="int" />
 			<param index="2" name="target" type="Node2D" />
 			<param index="3" name="target_global_position" type="Vector2" />
-			<description>
-				Emitted once the homing target gets reached by a bullet.
-
-				Adjust the distance for considering a target reached with [member homing_distance_before_reached].
-
-				The [code]target_global_position[/code] is always valid for access, it can be either the Node2D's global position, a global position target or a mouse global position target.
-
-				Warning: Always check if target is null or not since the bullet might be following a global position or a mouse position instead of a Node2D.
-			</description>
+			<description>一旦子弹到达寻的目标，就会发射。
+				调整距离以考虑使用 [member homing_distance_before_reached] 达到的目标。
+				[code]target_global_position[/code]对于访问始终有效，它可以是Node2D的全局位置、全局位置目标或鼠标全局位置目标。
+				警告：始终检查 target 是否为空，因为项目符号可能跟随全局位置或鼠标位置而不是 Node2D。</description>
 		</signal>
 	</signals>
 	<constants>

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<class name="BlockBullets2D" inherits="MultiMeshBullets2D" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+<?xml version='1.0' encoding='utf-8'?>
+<class xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="BlockBullets2D" inherits="MultiMeshBullets2D" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
 	<brief_description>
 		一个沿单一方向移动的子弹块。始终使用[BulletFactory2D]来生成它们，这是唯一正确的方式。
 	</brief_description>

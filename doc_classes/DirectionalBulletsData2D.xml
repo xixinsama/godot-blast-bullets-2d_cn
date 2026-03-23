@@ -4,21 +4,20 @@
 		包含[DirectionalBullets2D]的生成数据。
 	</brief_description>
 	<description>
-		Ensure that the [member MultiMeshBulletsData2D.transforms] and [member all_bullet_speed_data] are set or your game will crash.
-		Check [MultiMeshBulletsData2D]'s documentation for the rest of the properties.
+		确保设置了 [member MultiMeshBulletsData2D.transforms] 和 [member all_bullet_speed_data]，否则你的游戏会崩溃。其余属性请查阅 [MultiMeshBulletsData2D] 的文档。
 	</description>
 	<tutorials>
 	</tutorials>
 	<members>
 		<member name="adjust_direction_based_on_rotation" type="bool" setter="set_adjust_direction_based_on_rotation" getter="get_adjust_direction_based_on_rotation" default="false">
-			If enabled, the bullets will adjust their direction when rotating, instead of just simply spinning.
+			如果启用，子弹在旋转时会调整其方向，而不是简单地自转。
 		</member>
 		<member name="all_bullet_speed_data" type="BulletSpeedData2D[]" setter="set_all_bullet_speed_data" getter="get_all_bullet_speed_data" default="[]">
-			[b]MANDATORY[/b]
-			You can provide [BulletSpeedData2D] for every single bullet - meaning that it should contain the same amount of data as the [member MultiMeshBulletsData2D.transforms].
+			[b]必填[/b]
+			你可以为每个子弹提供 [BulletSpeedData2D] - 这意味着其数据量应与 [member MultiMeshBulletsData2D.transforms] 相同。
 
-			Warning: If you provide less [BulletSpeedData2D] than the amount of bullets (same as amount of transforms), ALL bullets will use only the first provided speed data.
-			Note: [BulletSpeedData2D] has a helper static method that you can use to generate random speed data - [method BulletSpeedData2D.generate_random_data()].
+			警告：如果你提供的 [BulletSpeedData2D] 数量少于子弹数量（与变换数量相同），所有子弹将仅使用第一个提供的速度数据。
+			注意：[BulletSpeedData2D] 有一个辅助静态方法可用于生成随机速度数据 - [method BulletSpeedData2D.generate_random_data()]。
 		</member>
 	</members>
 </class>

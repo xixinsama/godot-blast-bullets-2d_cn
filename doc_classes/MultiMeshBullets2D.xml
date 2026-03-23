@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<class name="MultiMeshBullets2D" inherits="MultiMeshInstance2D" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+<?xml version='1.0' encoding='utf-8'?>
+<class xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="MultiMeshBullets2D" inherits="MultiMeshInstance2D" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
 	<brief_description>
 		这个类仅供其他C++类继承。永远不要单独使用它。始终使用[BulletFactory2D]，这是唯一正确的方式。
 	</brief_description>

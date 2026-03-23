@@ -10,66 +10,55 @@
 	<members>
 		<member name="direction_curve_rotation_speed" type="float" setter="set_direction_curve_rotation_speed" getter="get_direction_curve_rotation_speed" default="18.0">
 			子弹旋转以面向X和Y方向曲线定义的调整方向的速度。
-		</member>
+</member>
 		<member name="movement_speed_curve" type="Curve" setter="set_movement_speed_curve" getter="get_movement_speed_curve">
-			The curve used to control the movement speed of the bullet over time. 
-			The X-axis represents the normalized time (0 start of life to 1 end of life) of the bullet's lifetime, while the Y-axis represents the speed value at that particular time.
+用于控制子弹随时间移动速度的曲线。X轴表示子弹生命周期的归一化时间（0表示生命开始，1表示生命结束），Y轴表示特定时间点的速度值。
 
-			Note that you can set [member movement_use_unit_curve] to false to have absolute values for the time.
-		</member>
+注意：你可以将[member movement_use_unit_curve]设置为false以使用绝对时间值。
+</member>
 		<member name="movement_use_unit_curve" type="bool" setter="set_movement_use_unit_curve" getter="get_movement_use_unit_curve" default="true">
-			Whether to use a unit curve for the movement speed curve. 
-			If [code]true[/code], the X-axis of the curve is normalized (0 start of life to 1 end of life) based on the bullet's lifetime. 
-			If [code]false[/code], the X-axis represents absolute time values (at exactly X lifetime have THIS Y SPEED value).
-		</member>
+是否对移动速度曲线使用单位曲线。如果为[code]true[/code]，曲线的X轴将基于子弹的生命周期进行归一化（0表示生命开始，1表示生命结束）。如果为[code]false[/code]，X轴表示绝对时间值（在精确的X生命周期时具有此Y速度值）。
+</member>
 		<member name="rotate_towards_adjusted_direction" type="bool" setter="set_rotate_towards_adjusted_direction" getter="get_rotate_towards_adjusted_direction" default="true">
-			Whether the bullet should rotate to face the adjusted direction defined by the X and Y direction curves.
-		</member>
+子弹是否应旋转以面向由X和Y方向曲线定义的调整方向。
+</member>
 		<member name="rotation_speed_curve" type="Curve" setter="set_rotation_speed_curve" getter="get_rotation_speed_curve">
-			The curve used to control the rotation speed of the bullet over time.
-			The X-axis represents the normalized time (0 start of life to 1 end of life) of the bullet's lifetime, while the Y-axis represents the rotation speed value at that particular time.
+用于控制子弹随时间旋转速度的曲线。
+X轴表示子弹生命周期的归一化时间（0表示生命开始，1表示生命结束），Y轴表示特定时间点的旋转速度值。
 
-			Note that you can set [member rotation_use_unit_curve] to false to have absolute values for the time.
-		</member>
+注意：你可以将[member rotation_use_unit_curve]设置为false以使用绝对时间值。
+</member>
 		<member name="rotation_use_unit_curve" type="bool" setter="set_rotation_use_unit_curve" getter="get_rotation_use_unit_curve" default="true">
-			Whether to use a unit curve for the rotation speed curve. 
-			If [code]true[/code], the X-axis of the curve is normalized (0 start of life to 1 end of life) based on the bullet's lifetime. 
-			If [code]false[/code], the X-axis represents absolute time values (at exactly X lifetime have THIS Y ROTATION SPEED value).
-		</member>
+是否对旋转速度曲线使用单位曲线。如果为[code]true[/code]，曲线的X轴将基于子弹的生命周期进行归一化（0表示生命开始，1表示生命结束）。如果为[code]false[/code]，X轴表示绝对时间值（在精确的X生命周期时具有此Y旋转速度值）。
+</member>
 		<member name="x_direction_curve" type="Curve" setter="set_x_direction_curve" getter="get_x_direction_curve">
-			The curve used to control the bullet's direction adjustment along the X-axis over time. 
-			The X-axis represents the normalized time (0 start of life to 1 end of life) of the bullet's lifetime, while the Y-axis represents the direction adjustment value at that particular time.
+用于控制子弹随时间沿X轴方向调整的曲线。X轴表示子弹生命周期的归一化时间（0表示生命开始，1表示生命结束），Y轴表示特定时间点的方向调整值。
 
-			Note that you can set [member x_direction_use_unit_curve] to false to have absolute values for the time.
-		</member>
+注意：你可以将[member x_direction_use_unit_curve]设置为false以使用绝对时间值。
+</member>
 		<member name="x_direction_curve_mode" type="int" setter="set_x_direction_curve_mode" getter="get_x_direction_curve_mode" enum="BlastBullets2D.DirectionCurveMode" default="0">
-			Whether the X direction curve should be applied additively to the bullet's current direction or override it entirely.
-		</member>
+X方向曲线是应该叠加到子弹当前方向上，还是完全覆盖它。
+</member>
 		<member name="x_direction_curve_strength" type="float" setter="set_x_direction_curve_strength" getter="get_x_direction_curve_strength" default="1.0">
-			A multiplier for the X direction curve's output value, allowing you to scale the effect of the curve on the bullet's direction.
-		</member>
+X方向曲线输出值的乘数，允许你缩放曲线对子弹方向的影响。
+</member>
 		<member name="x_direction_use_unit_curve" type="bool" setter="set_x_direction_use_unit_curve" getter="get_x_direction_use_unit_curve" default="true">
-			Whether to use a unit curve for the X direction curve. 
-			If [code]true[/code], the X-axis of the curve is normalized (0 start of life to 1 end of life) based on the bullet's lifetime. 
-			If [code]false[/code], the X-axis represents absolute time values (at exactly X lifetime have THIS Y DIRECTION value).
-		</member>
+是否对X方向曲线使用单位曲线。如果为[code]true[/code]，曲线的X轴将基于子弹的生命周期进行归一化（0表示生命开始，1表示生命结束）。如果为[code]false[/code]，X轴表示绝对时间值（在精确的X生命周期时具有此Y方向值）。
+</member>
 		<member name="y_direction_curve" type="Curve" setter="set_y_direction_curve" getter="get_y_direction_curve">
-			The curve used to control the bullet's direction adjustment along the Y-axis over time. 
-			The X-axis represents the normalized time (0 start of life to 1 end of life) of the bullet's lifetime, while the Y-axis represents the direction adjustment value at that particular time.
+用于控制子弹随时间沿Y轴方向调整的曲线。X轴表示子弹生命周期的归一化时间（0表示生命开始，1表示生命结束），Y轴表示特定时间点的方向调整值。
 
-			Note that you can set [member y_direction_use_unit_curve] to false to have absolute values for the time.
-		</member>
+注意：你可以将[member y_direction_use_unit_curve]设置为false以使用绝对时间值。
+</member>
 		<member name="y_direction_curve_mode" type="int" setter="set_y_direction_curve_mode" getter="get_y_direction_curve_mode" enum="BlastBullets2D.DirectionCurveMode" default="0">
-			Whether the Y direction curve should be applied additively to the bullet's current direction or override it entirely.
-		</member>
+Y方向曲线是应该叠加到子弹当前方向上，还是完全覆盖它。
+</member>
 		<member name="y_direction_curve_strength" type="float" setter="set_y_direction_curve_strength" getter="get_y_direction_curve_strength" default="1.0">
-			A multiplier for the Y direction curve's output value, allowing you to scale the effect of the curve on the bullet's direction.
-		</member>
+Y方向曲线输出值的乘数，允许你缩放曲线对子弹方向的影响。
+</member>
 		<member name="y_direction_use_unit_curve" type="bool" setter="set_y_direction_use_unit_curve" getter="get_y_direction_use_unit_curve" default="true">
-			Whether to use a unit curve for the Y direction curve. 
-			If [code]true[/code], the X-axis of the curve is normalized (0 start of life to 1 end of life) based on the bullet's lifetime. 
-			If [code]false[/code], the X-axis represents absolute time values (at exactly X lifetime have THIS Y DIRECTION value).
-		</member>
+是否对Y方向曲线使用单位曲线。如果为[code]true[/code]，曲线的X轴将基于子弹的生命周期进行归一化（0表示生命开始，1表示生命结束）。如果为[code]false[/code]，X轴表示绝对时间值（在精确的X生命周期时具有此Y方向值）。
+</member>
 	</members>
 	<constants>
 		<constant name="Additive" value="0" enum="DirectionCurveMode">
